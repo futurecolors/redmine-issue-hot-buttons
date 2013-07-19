@@ -632,6 +632,22 @@ jQuery(document).ready(function() {
          */
         render: function(config) {
             this.config = new Hash(config);
+            
+            navigator.sayswho= (function(){
+                var N= navigator.appName, ua= navigator.userAgent, tem;
+                var M= ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+                if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
+                M= M? [M[1], M[2]]: [N, navigator.appVersion, '-?'];
+            
+                return M;
+            })();
+            
+            // Disable timetracker not working in Chrome 28 while tab is inactive
+            if (navigator.sayswho[0] == 'Chrome' && navigator.sayswho[1] >= '28') { 
+                console.log('Chrome 28 is buggy, so we deactivated timer until https://code.google.com/p/chromium/issues/detail?id=259680 is fixed');
+                return '';
+            }
+
 
             // button is not suitable for current context
             if (this.check_conditions() && this.is_workflow_suitable()) {
