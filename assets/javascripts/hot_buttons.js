@@ -642,9 +642,9 @@ jQuery(document).ready(function() {
                 return M;
             })();
             
-            // Disable timetracker not working in Chrome 28 while tab is inactive
-            if (navigator.sayswho[0] == 'Chrome' && navigator.sayswho[1] >= '28') { 
-                console.log('Chrome 28 is buggy, so we deactivated timer until https://code.google.com/p/chromium/issues/detail?id=259680 is fixed');
+            // Disable timetracker not working properly in Chrome 28-29 while tab is inactive
+            if (navigator.sayswho[0] == 'Chrome' && navigator.sayswho[1] >= '28' && navigator.sayswho[1] < '30') {
+                console.error('Chrome 28-29 is buggy, so we deactivated timer. See https://code.google.com/p/chromium/issues/detail?id=259680 for details');
                 return '';
             }
 
